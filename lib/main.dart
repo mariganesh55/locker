@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:locker/core/app_helpers.dart';
 import 'package:locker/core/getx_controllers.dart';
-import 'package:locker/features/profile/data/datasource/user_details_datasource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/splash_screen.dart';
@@ -22,6 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: GoogleFonts.montserrat().fontFamily,
       ),
