@@ -204,7 +204,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                                 height: 27,
                                               ),
                                               const Text(
-                                                'Log Out',
+                                                'Sign Out',
                                                 style: TextStyle(
                                                     fontSize: 30,
                                                     fontWeight: FontWeight.w600,

@@ -25,13 +25,13 @@ class _GridTileWidgetState extends State<GridTileWidget> {
 
   String getStatus(String? userEmail) {
     if (userEmail == '')
-      return 'available';
+      return 'Available';
     else if (userEmail == AppHelpers.SHARED_PREFERENCES.getString('user'))
-      return 'owned';
+      return 'Owned';
     else if (userEmail != AppHelpers.SHARED_PREFERENCES.getString('user'))
-      return 'occupied';
+      return 'Occupied';
     else
-      return 'reserved';
+      return 'Reserved';
   }
 
   @override
@@ -60,7 +60,7 @@ class _GridTileWidgetState extends State<GridTileWidget> {
               : const EdgeInsets.all(10),
           child: InkWell(
             onTap: () {
-              if (status == 'available' || status == 'owned') {
+              if (status == 'Available' || status == 'Owned') {
                 Navigator.push(
                     context,
                     PageTransition(
@@ -79,7 +79,7 @@ class _GridTileWidgetState extends State<GridTileWidget> {
                 height: size.width * 0.35,
                 width: size.width * 0.35,
                 decoration: BoxDecoration(
-                    color: (status == 'available' || status == 'owned')
+                    color: (status == 'Available' || status == 'Owned')
                         ? widget.data.status != 'open'
                             ? Colors.red
                             : AppColors.lightGreen

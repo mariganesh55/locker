@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:locker/core/app_colors.dart';
 import 'package:locker/features/lockers/presentation/widgets/password_widget.dart';
-import 'package:locker/features/profile/presentation/pages/locker_history_screen.dart';
 import 'package:locker/features/profile/presentation/pages/my_lockers_screen.dart';
 import 'package:locker/features/profile/presentation/pages/my_profile_screen.dart';
-import 'package:locker/features/profile/presentation/widgets/list_tile_widget.dart';
 import 'package:locker/features/profile/presentation/widgets/profile_options_widget.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -80,16 +78,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 height: 68,
               ),
               //locker history
-              ProfileOptionsWidget(
-                index: 0,
-                title: 'Locker History',
-                onTap: () => Navigator.push(
-                    context,
-                    PageTransition(
-                      child: LockerHistoryScreen(),
-                      type: PageTransitionType.fade,
-                    )),
-              ),
+              // ProfileOptionsWidget(
+              //   index: 0,
+              //   title: 'Locker History',
+              //   onTap: () => Navigator.push(
+              //       context,
+              //       PageTransition(
+              //         child: LockerHistoryScreen(),
+              //         type: PageTransitionType.fade,
+              //       )),
+              // ),
               ProfileOptionsWidget(
                 index: 1,
                 title: 'My Profile',
@@ -118,7 +116,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         context,
                         PageTransition(
                             type: PageTransitionType.leftToRight,
-                            child: const PasswordWidget(changePassCode: true,),
+                            child: const PasswordWidget(
+                              changePassCode: true,
+                            ),
                             duration: const Duration(milliseconds: 250)));
                   }),
             ],

@@ -171,7 +171,7 @@ class _NewLockerScreenState extends State<NewLockerScreen> {
                                               : MainAxisAlignment.center,
                                       children: [
                                         //add locker
-                                        if (widget.status == 'available')
+                                        if (widget.status == 'Available')
                                           InkWell(
                                             onTap: () {
                                               print(
@@ -500,7 +500,7 @@ class _NewLockerScreenState extends State<NewLockerScreen> {
                                                 height: 27,
                                               ),
                                               const Text(
-                                                'Log Out',
+                                                'Sign Out',
                                                 style: TextStyle(
                                                     fontSize: 30,
                                                     fontWeight: FontWeight.w600,

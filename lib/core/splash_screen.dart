@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset('assets/common/logo.png', width: 80.88, height: 114.59,),
-                  const Text('SMART LOCKER', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 26, color: AppColors.lightGreen),)
+                  const Text('SMART DIGI LOCKER', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 26, color: AppColors.lightGreen),)
                 ],
               ),
             ),

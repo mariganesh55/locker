@@ -25,7 +25,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           Image.asset('assets/common/logo.png', height: 85, width: 60, color: const Color(0xFF75F0BD),),
           //text
           const SizedBox(height: 6,),
-          const Text('Welcome to Smart Locker', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: AppColors.lightGreen),),
+          const Text('Welcome to Smart Digi Locker', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: AppColors.lightGreen),),
           //text
           const SizedBox(height: 8,),
           const Text('Create New Password', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12, color: AppColors.textGrey,),),

@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
             height: 6,
           ),
           const Text(
-            'Welcome to Smart Locker',
+            'Welcome to Smart Digi Locker',
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
@@ -190,23 +190,34 @@ class _LoginScreenState extends State<LoginScreen> {
                     LoginDatasource()
                         .userLogin(_email!, _password!)
                         .then((value) {
-                          print("login response -> ${value}");
+                      print("login response -> ${value}");
                       if (value) {
-                        UserDetailsDataSource().getUserDetails(_email!).then((data){
+                        UserDetailsDataSource()
+                            .getUserDetails(_email!)
+                            .then((data) {
                           print("object data --> ${data}");
                           setState(() {
                             _isLoading = false;
                           });
-                          if(data.first.passcode != null) AppHelpers.SHARED_PREFERENCES.setString('passcode', data.first.passcode!);
-                          AppHelpers.SHARED_PREFERENCES.setBool('isLogged', true);
-                          AppHelpers.SHARED_PREFERENCES.setString('user', _email!);
-                          Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: const ReserveLockerWidget(), duration: const Duration(milliseconds: 250)));
+                          if (data.first.passcode != null)
+                            AppHelpers.SHARED_PREFERENCES
+                                .setString('passcode', data.first.passcode!);
+                          AppHelpers.SHARED_PREFERENCES
+                              .setBool('isLogged', true);
+                          AppHelpers.SHARED_PREFERENCES
+                              .setString('user', _email!);
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                  type: PageTransitionType.fade,
+                                  child: const ReserveLockerWidget(),
+                                  duration: const Duration(milliseconds: 250)));
                         });
                       }
-                    }).catchError((e){
+                    }).catchError((e) {
                       setState(() {
-                      _isLoading = false;
-                    });
+                        _isLoading = false;
+                      });
                     });
                   } else {
                     showSnackBar(
@@ -265,13 +276,23 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
               child: Center(
-                  child: _isLoading ? Center(child: SizedBox(height: 20, width: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2,)),) : Text(
-                'Sign In',
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white),
-              )),
+                  child: _isLoading
+                      ? Center(
+                          child: SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
+                              )),
+                        )
+                      : Text(
+                          'Sign In',
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white),
+                        )),
             ),
           ),
           //or
@@ -371,7 +392,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('Don’t have a account?',
+              const Text('New User?',
                   style: TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 12,
@@ -384,7 +405,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: const SignInScreen(),
                           duration: const Duration(milliseconds: 250))),
                   child: const Text(
-                    'Register',
+                    'Signup',
                     style: TextStyle(
                         fontWeight: FontWeight.w800,
                         fontSize: 12,

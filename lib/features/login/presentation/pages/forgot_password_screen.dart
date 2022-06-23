@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:locker/core/app_colors.dart';
 import 'package:locker/core/app_theme.dart';
-import 'package:locker/features/login/presentation/pages/signin_screen.dart';
 import 'package:locker/features/login/presentation/widgets/otp_widget.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -20,19 +19,43 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.scaffoldBG,
       body: Column(
-        mainAxisAlignment:  MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           //logo
           SizedBox(width: size.width),
-          Image.asset('assets/common/logo.png', height: 85, width: 60, color: const Color(0xFF75F0BD),),
+          Image.asset(
+            'assets/common/logo.png',
+            height: 85,
+            width: 60,
+            color: const Color(0xFF75F0BD),
+          ),
           //text
-          const SizedBox(height: 6,),
-          const Text('Welcome to Smart Locker', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: AppColors.lightGreen),),
+          const SizedBox(
+            height: 6,
+          ),
+          const Text(
+            'Welcome to Smart Digi Locker',
+            style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+                color: AppColors.lightGreen),
+          ),
           //text
-          const SizedBox(height: 8,),
-          const Text('Enter the Mobile number', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12, color: AppColors.textGrey,),),
+          const SizedBox(
+            height: 8,
+          ),
+          const Text(
+            'Enter your email address',
+            style: TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 12,
+              color: AppColors.textGrey,
+            ),
+          ),
           //mobile
-          const SizedBox(height: 28,),
+          const SizedBox(
+            height: 28,
+          ),
           Container(
             height: 48,
             width: 343,
@@ -42,58 +65,62 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 BoxShadow(
                     color: Color.fromRGBO(31, 31, 31, 0.9),
                     spreadRadius: -25,
-                    offset: Offset(5, 5)
-                ),
+                    offset: Offset(5, 5)),
                 BoxShadow(
                     color: Color.fromRGBO(51, 51, 51, 0.9),
                     spreadRadius: -10,
-                    offset: Offset(-5, -5)
-                ),
+                    offset: Offset(-5, -5)),
                 BoxShadow(
                     color: Color.fromRGBO(31, 31, 31, 0.2),
                     spreadRadius: -10,
-                    offset: Offset(5, -5)
-                ),
+                    offset: Offset(5, -5)),
                 BoxShadow(
                     color: Color.fromRGBO(31, 31, 31, 0.2),
                     spreadRadius: -10,
-                    offset: Offset(-5, 5)
-                ),
+                    offset: Offset(-5, 5)),
                 BoxShadow(
                     color: Color.fromRGBO(31, 31, 31, 0.5),
                     spreadRadius: -2,
-                    offset: Offset(-1, -1)
-                ),
+                    offset: Offset(-1, -1)),
                 BoxShadow(
                     color: Color.fromRGBO(51, 51, 51, 0.3),
                     spreadRadius: -2,
-                    offset: Offset(1, 1)
-                ),
+                    offset: Offset(1, 1)),
               ],
             ),
             child: Stack(
               children: [
                 TextFormField(
-                  decoration: AppTheme.textFieldDecoration('Mobile Number', 'assets/login/user_name.png'),
-                  style: const TextStyle(color: AppColors.hintTextGrey, fontSize: 12),
+                  decoration: AppTheme.textFieldDecoration(
+                      'Email Address', 'assets/login/user_name.png'),
+                  style: const TextStyle(
+                      color: AppColors.hintTextGrey, fontSize: 12),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 12.0, left: 11),
-                  child: Image.asset('assets/common/mobile.png', height: 25, width: 25, color: AppColors.hintTextGrey,),
+                  child: Image.asset(
+                    'assets/common/mobile.png',
+                    height: 25,
+                    width: 25,
+                    color: AppColors.hintTextGrey,
+                  ),
                 )
               ],
             ),
           ),
           //send otp
-          const SizedBox(height: 15,),
+          const SizedBox(
+            height: 15,
+          ),
           InkWell(
             onTap: () => Navigator.push(
                 context,
                 PageTransition(
                     type: PageTransitionType.leftToRight,
-                    child: const OTPWidget(forgotPassword: true,),
-                    duration: const Duration(
-                        milliseconds: 250))),
+                    child: const OTPWidget(
+                      forgotPassword: true,
+                    ),
+                    duration: const Duration(milliseconds: 250))),
             child: Container(
               height: 57,
               width: 343,
@@ -129,24 +156,44 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       offset: Offset(1, 1)),
                 ],
               ),
-              child: const Center(child: Text('Send OTP', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.white),)),
+              child: const Center(
+                  child: Text(
+                'Send OTP',
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white),
+              )),
             ),
           ),
           //register
-          const SizedBox(height: 15,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Don’t have a account?', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 12, color: AppColors.textGrey)),
-              TextButton(onPressed: () => Navigator.pushReplacement(
-                  context,
-                  PageTransition(
-                      type: PageTransitionType.rightToLeft,
-                      child: const SignInScreen(),
-                      duration: const Duration(
-                          milliseconds: 250))), child: const Text('Register', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 12, color: AppColors.colorTextGreen),))
-            ],
-          )
+          const SizedBox(
+            height: 15,
+          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     const Text('Don’t have a account?',
+          //         style: TextStyle(
+          //             fontWeight: FontWeight.w800,
+          //             fontSize: 12,
+          //             color: AppColors.textGrey)),
+          //     TextButton(
+          //         onPressed: () => Navigator.pushReplacement(
+          //             context,
+          //             PageTransition(
+          //                 type: PageTransitionType.rightToLeft,
+          //                 child: const SignInScreen(),
+          //                 duration: const Duration(milliseconds: 250))),
+          //         child: const Text(
+          //           'Register',
+          //           style: TextStyle(
+          //               fontWeight: FontWeight.w800,
+          //               fontSize: 12,
+          //               color: AppColors.colorTextGreen),
+          //         ))
+          //   ],
+          // )
         ],
       ),
     );
