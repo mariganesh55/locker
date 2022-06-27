@@ -108,10 +108,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 .asyncMap((i) =>
                                     LockerDatasource().getAllLockerDetails()),
                             builder: (builder, snapShot) {
-                                print("object response -> ${snapShot.data} =? ${snapShot.hasData}");
+                              print(
+                                  "object response -> ${snapShot.data} =? ${snapShot.hasData}");
                               if (snapShot.hasData) {
-
-                                                                print(AppHelpers.SHARED_PREFERENCES
+                                print(AppHelpers.SHARED_PREFERENCES
                                     .getString('user'));
                                 List<AllLockerResponse> lockersList = [];
                                 if (showMyLockersOnly) {
@@ -139,10 +139,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   );
                                 }
                                 return Padding(
-                                  padding: EdgeInsets.only(
-                                      left: size.width * 0.025,
-                                      right: size.width * 0.025),
-                                  child: GridView.builder(
+                                    padding: EdgeInsets.only(
+                                        left: size.width * 0.025,
+                                        right: size.width * 0.025),
+                                    child: GridView.builder(
                                       itemCount: lockersList.length,
                                       shrinkWrap: true,
                                       gridDelegate:
@@ -150,13 +150,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                         crossAxisCount: 2,
                                         childAspectRatio: 1,
                                       ),
-                                      itemBuilder: (itemBuilder, index) =>
-                                          GridTileWidget(
-                                            index: index,
-                                            from: 'Home',
-                                            data: lockersList[index],
-                                          )),
-                                );
+                                      itemBuilder: (itemBuilder, index) {
+                                        return GridTileWidget(
+                                          index: index,
+                                          from: 'Home',
+                                          data: lockersList[index],
+                                        );
+                                      },
+                                    ));
                               }
 
                               if (snapShot.hasError)

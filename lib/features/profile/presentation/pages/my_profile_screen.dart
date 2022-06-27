@@ -6,7 +6,6 @@ import 'package:locker/features/lockers/presentation/pages/add_locker_screen.dar
 import 'package:locker/features/login/presentation/pages/login_home_screen.dart';
 import 'package:locker/features/profile/data/datasource/user_details_datasource.dart';
 import 'package:locker/features/profile/data/model/user_details_response.dart';
-import 'package:locker/features/profile/presentation/widgets/list_tile_widget.dart';
 import 'package:page_transition/page_transition.dart';
 
 class MyProfileScreen extends StatefulWidget {
@@ -93,9 +92,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                     height: 40,
                                   ),
                                   infoRowWidget(
-                                      label: 'Username', value: data.username),
+                                      label: 'First Name',
+                                      value: data.username),
                                   infoRowWidget(
-                                      label: 'email', value: data.email),
+                                      label: 'Last Name', value: data.username),
+                                  infoRowWidget(
+                                      label: 'Email', value: data.email),
                                 ],
                               );
                             }
@@ -446,7 +448,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(
             child: Text(label,

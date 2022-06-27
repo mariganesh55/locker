@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:locker/core/app_colors.dart';
 import 'package:locker/core/app_theme.dart';
 import 'package:locker/features/login/presentation/widgets/otp_widget.dart';
@@ -170,6 +171,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           const SizedBox(
             height: 15,
           ),
+          Padding(
+            padding: const EdgeInsets.only(top: 18.0),
+            child: TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text("Back")),
+          )
           // Row(
           //   mainAxisAlignment: MainAxisAlignment.center,
           //   children: [

@@ -24,6 +24,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool _isLoading = false;
 
+  bool showPassword = false;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -156,8 +158,19 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Stack(
               children: [
                 TextFormField(
+                  obscureText: !showPassword,
                   decoration: AppTheme.textFieldDecoration(
-                      'Password', 'assets/login/password.png'),
+                    'Password',
+                    'assets/login/password.png',
+                  ).copyWith(
+                    suffixIcon: GestureDetector(
+                      onTap: () => setState(() => showPassword = !showPassword),
+                      child: Icon(
+                        showPassword ? Icons.visibility : Icons.visibility_off,
+                        color: Color(0xFF5FB3AB),
+                      ),
+                    ),
+                  ),
                   style: const TextStyle(
                       color: AppColors.hintTextGrey, fontSize: 12),
                   onChanged: (val) => _password = val,
@@ -412,6 +425,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: AppColors.colorTextGreen),
                   ))
             ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Text(
+              "Version " +
+                  (AppHelpers.SHARED_PREFERENCES.getString("version") ?? ''),
+              style: TextStyle(color: Colors.white),
+            ),
           )
         ],
       ),
