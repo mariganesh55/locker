@@ -34,10 +34,10 @@ class _LoginScreenState extends State<LoginScreen> {
           //logo
           const SizedBox(height: 115),
           Image.asset(
-            'assets/common/logo.png',
+            'assets/common/lock.png',
             height: 85,
             width: 60,
-            color: const Color(0xFF75F0BD),
+            // color: const Color(0xFF75F0BD),
           ),
           //text
           const SizedBox(
@@ -212,19 +212,28 @@ class _LoginScreenState extends State<LoginScreen> {
                           setState(() {
                             _isLoading = false;
                           });
-                          if (data.first.passcode != null)
+                          if (data.first.approve == true) {
+                            if (data.first.passcode != null)
+                              AppHelpers.SHARED_PREFERENCES
+                                  .setString('passcode', data.first.passcode!);
                             AppHelpers.SHARED_PREFERENCES
-                                .setString('passcode', data.first.passcode!);
-                          AppHelpers.SHARED_PREFERENCES
-                              .setBool('isLogged', true);
-                          AppHelpers.SHARED_PREFERENCES
-                              .setString('user', _email!);
-                          Navigator.push(
-                              context,
-                              PageTransition(
-                                  type: PageTransitionType.fade,
-                                  child: const ReserveLockerWidget(),
-                                  duration: const Duration(milliseconds: 250)));
+                                .setBool('isLogged', true);
+                            AppHelpers.SHARED_PREFERENCES
+                                .setString('user', _email!);
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.fade,
+                                    child: const ReserveLockerWidget(),
+                                    duration:
+                                        const Duration(milliseconds: 250)));
+                          } else {
+                            AppHelpers.SHARED_PREFERENCES.clear();
+                            showSnackBar(
+                                context: context,
+                                message: 'User is not approved yet.',
+                                bgColor: Colors.red);
+                          }
                         });
                       }
                     }).catchError((e) {
