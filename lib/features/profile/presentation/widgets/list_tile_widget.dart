@@ -96,10 +96,9 @@ class _ListTileWidgetState extends State<ListTileWidget> {
                     width: 33,
                   ),
                   Image.asset(
-                    'assets/common/logo.png',
+                    'assets/common/lock.png',
                     height: 30,
                     width: 30,
-                    color: AppColors.colorTextGreen,
                   ),
                   const SizedBox(
                     width: 15,

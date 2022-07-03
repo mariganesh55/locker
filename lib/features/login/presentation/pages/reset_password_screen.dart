@@ -22,7 +22,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         children: [
           //logo
           SizedBox(width: size.width),
-          Image.asset('assets/common/logo.png', height: 85, width: 60, color: const Color(0xFF75F0BD),),
+          Image.asset('assets/common/lock.png', height: 85, width: 60,),
           //text
           const SizedBox(height: 6,),
           const Text('Welcome to Smart Digi Locker', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: AppColors.lightGreen),),

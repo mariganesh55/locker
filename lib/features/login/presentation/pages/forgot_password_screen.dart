@@ -25,10 +25,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           //logo
           SizedBox(width: size.width),
           Image.asset(
-            'assets/common/logo.png',
+            'assets/common/lock.png',
             height: 85,
             width: 60,
-            color: const Color(0xFF75F0BD),
+            // color: const Color(0xFF75F0BD),
           ),
           //text
           const SizedBox(
