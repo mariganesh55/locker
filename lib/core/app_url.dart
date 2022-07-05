@@ -1,5 +1,5 @@
 class AppUrl {
-  static const String baseUrl = 'http://3.218.248.193:4001';
+  static const String baseUrl = 'http://3.239.93.89:4001';
   static const String allLocker = '$baseUrl/locker/lockerdata';
   static const String register = '$baseUrl/user/register';
   static const String login = '$baseUrl/user/login';
