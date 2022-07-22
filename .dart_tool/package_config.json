@@ -45,7 +45,7 @@
     },
     {
       "name": "collection",
-      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/collection-1.15.0",
+      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/collection-1.16.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -63,7 +63,7 @@
     },
     {
       "name": "fake_async",
-      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0",
+      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -95,13 +95,13 @@
       "name": "flutter_test",
       "rootUri": "file:///Users/mariganesh/Documents/flutter/packages/flutter_test",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     },
     {
       "name": "flutter_web_plugins",
       "rootUri": "file:///Users/mariganesh/Documents/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     },
     {
       "name": "get",
@@ -112,6 +112,36 @@
     {
       "name": "google_fonts",
       "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/google_fonts-2.3.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "google_sign_in",
+      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-5.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "google_sign_in_android",
+      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_android-6.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "google_sign_in_ios",
+      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_ios-5.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "google_sign_in_platform_interface",
+      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_platform_interface-2.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "google_sign_in_web",
+      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_web-0.10.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -135,9 +165,9 @@
     },
     {
       "name": "js",
-      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3",
+      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.4",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.16"
     },
     {
       "name": "matcher",
@@ -147,7 +177,7 @@
     },
     {
       "name": "material_color_utilities",
-      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/material_color_utilities-0.1.3",
+      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/material_color_utilities-0.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.13"
     },
@@ -201,7 +231,7 @@
     },
     {
       "name": "path",
-      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0",
+      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -278,6 +308,12 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "quiver",
+      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/quiver-3.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "shared_preferences",
       "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-2.0.13",
       "packageUri": "lib/",
@@ -326,6 +362,24 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "sign_in_with_apple",
+      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/sign_in_with_apple-4.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "sign_in_with_apple_platform_interface",
+      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/sign_in_with_apple_platform_interface-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "sign_in_with_apple_web",
+      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/sign_in_with_apple_web-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///Users/mariganesh/Documents/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -333,9 +387,9 @@
     },
     {
       "name": "source_span",
-      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/source_span-1.8.1",
+      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/source_span-1.8.2",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.14"
     },
     {
       "name": "stack_trace",
@@ -363,7 +417,7 @@
     },
     {
       "name": "test_api",
-      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.4.8",
+      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.4.9",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -375,7 +429,7 @@
     },
     {
       "name": "vector_math",
-      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.1",
+      "rootUri": "file:///Users/mariganesh/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -410,7 +464,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2022-07-04T03:36:03.756369Z",
+  "generated": "2022-07-22T10:42:10.319367Z",
   "generator": "pub",
-  "generatorVersion": "2.16.2"
+  "generatorVersion": "2.17.5"
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "636337196688",
+    "project_id": "smart-locker-ea017",
+    "storage_bucket": "smart-locker-ea017.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636337196688:android:67770f010c2e5ad401d215",
+        "android_client_info": {
+          "package_name": "com.example.locker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636337196688-7of3432v8cc2njkhi3jplbmp3kkaoeok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLBU4yc8uZ8g8r_kQZlpR1p6Sow5AdrVY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "636337196688-7of3432v8cc2njkhi3jplbmp3kkaoeok.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

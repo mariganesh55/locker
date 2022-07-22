@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:locker/core/app_colors.dart';
 import 'package:locker/core/app_theme.dart';
 import 'package:locker/features/login/data/datasource/login_datasource.dart';
-import 'package:locker/features/login/presentation/pages/forgot_password_screen.dart';
-import 'package:locker/features/login/presentation/pages/signin_screen.dart';
 import 'package:locker/features/login/presentation/widgets/reserve_locker_widget.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -25,6 +24,30 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isLoading = false;
 
   bool showPassword = false;
+
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+    ],
+  );
+
+  GoogleSignInAccount? _currentUser;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) {
+      setState(() {
+        _currentUser = account;
+      });
+      print("***************");
+
+      print(_currentUser?.email);
+
+      print("***************");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -352,89 +375,91 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           //social login
           const SizedBox(height: 21),
-          // InkWell(
-          //   onTap: () {},
-          //   child: Container(
-          //     height: 57,
-          //     width: 343,
-          //     decoration: BoxDecoration(
-          //         borderRadius: BorderRadius.circular(10),
-          //         color: Colors.transparent,
-          //         border: Border.all(
-          //             color: const Color.fromRGBO(88, 184, 161, 0.5), width: 1),
-          //         boxShadow: const [
-          //           BoxShadow(
-          //               color: Colors.black12, spreadRadius: 0, blurRadius: 3)
-          //         ]),
-          //     child: Row(
-          //       children: [
-          //         const SizedBox(
-          //           width: 16.5,
-          //         ),
-          //         Image.asset(
-          //           'assets/login/google.png',
-          //           width: 24,
-          //           height: 24,
-          //         ),
-          //         const SizedBox(
-          //           width: 63,
-          //         ),
-          //         const Text(
-          //           'Login with Google',
-          //           style: TextStyle(
-          //               fontWeight: FontWeight.w400,
-          //               fontSize: 14,
-          //               color: Colors.white),
-          //           textAlign: TextAlign.center,
-          //         ),
-          //         const SizedBox(
-          //           width: 16.5,
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
+          InkWell(
+            onTap: () {
+              _handleSignIn();
+            },
+            child: Container(
+              height: 57,
+              width: 343,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.transparent,
+                  border: Border.all(
+                      color: const Color.fromRGBO(88, 184, 161, 0.5), width: 1),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Colors.black12, spreadRadius: 0, blurRadius: 3)
+                  ]),
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 16.5,
+                  ),
+                  Image.asset(
+                    'assets/login/google.png',
+                    width: 24,
+                    height: 24,
+                  ),
+                  const SizedBox(
+                    width: 63,
+                  ),
+                  const Text(
+                    'Login with Google',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                        color: Colors.white),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(
+                    width: 16.5,
+                  ),
+                ],
+              ),
+            ),
+          ),
           //forgot password
           const SizedBox(height: 11),
-          TextButton(
-              onPressed: () => Navigator.push(
-                  context,
-                  PageTransition(
-                      type: PageTransitionType.rightToLeft,
-                      child: const ForgotPasswordScreen(),
-                      duration: const Duration(milliseconds: 250))),
-              child: const Text(
-                'Forgot Password?',
-                style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 12,
-                    color: AppColors.colorTextGreen),
-              )),
+          // TextButton(
+          //     onPressed: () => Navigator.push(
+          //         context,
+          //         PageTransition(
+          //             type: PageTransitionType.rightToLeft,
+          //             child: const ForgotPasswordScreen(),
+          //             duration: const Duration(milliseconds: 250))),
+          //     child: const Text(
+          //       'Forgot Password?',
+          //       style: TextStyle(
+          //           fontWeight: FontWeight.w700,
+          //           fontSize: 12,
+          //           color: AppColors.colorTextGreen),
+          //     )),
           //register
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('New User?',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 12,
-                      color: AppColors.textGrey)),
-              TextButton(
-                  onPressed: () => Navigator.push(
-                      context,
-                      PageTransition(
-                          type: PageTransitionType.rightToLeft,
-                          child: const SignInScreen(),
-                          duration: const Duration(milliseconds: 250))),
-                  child: const Text(
-                    'Signup',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w800,
-                        fontSize: 12,
-                        color: AppColors.colorTextGreen),
-                  ))
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     const Text('New User?',
+          //         style: TextStyle(
+          //             fontWeight: FontWeight.w800,
+          //             fontSize: 12,
+          //             color: AppColors.textGrey)),
+          //     TextButton(
+          //         onPressed: () => Navigator.push(
+          //             context,
+          //             PageTransition(
+          //                 type: PageTransitionType.rightToLeft,
+          //                 child: const SignInScreen(),
+          //                 duration: const Duration(milliseconds: 250))),
+          //         child: const Text(
+          //           'Signup',
+          //           style: TextStyle(
+          //               fontWeight: FontWeight.w800,
+          //               fontSize: 12,
+          //               color: AppColors.colorTextGreen),
+          //         ))
+          //   ],
+          // ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
@@ -446,5 +471,13 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> _handleSignIn() async {
+    try {
+      await _googleSignIn.signIn();
+    } catch (error) {
+      print(error);
+    }
   }
 }
