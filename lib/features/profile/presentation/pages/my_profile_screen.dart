@@ -4,8 +4,6 @@ import 'package:locker/core/app_controllers.dart';
 import 'package:locker/core/app_helpers.dart';
 import 'package:locker/features/lockers/presentation/pages/add_locker_screen.dart';
 import 'package:locker/features/login/presentation/pages/login_home_screen.dart';
-import 'package:locker/features/profile/data/datasource/user_details_datasource.dart';
-import 'package:locker/features/profile/data/model/user_details_response.dart';
 import 'package:page_transition/page_transition.dart';
 
 class MyProfileScreen extends StatefulWidget {
@@ -16,6 +14,9 @@ class MyProfileScreen extends StatefulWidget {
 }
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
+  String? email;
+  String? name;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -79,45 +80,102 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: FutureBuilder<List<UserDetailsResponse>>(
-                          future: UserDetailsDataSource.getUserDetails(
-                              AppHelpers.SHARED_PREFERENCES.getString('user') ??
-                                  ''),
+                      child: FutureBuilder<void>(
+                          future: getDataFromPreference(),
                           builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              var data = snapshot.data![0];
+                            if (email != null && name != null) {
                               return Column(
                                 children: [
                                   SizedBox(
                                     height: 40,
                                   ),
                                   infoRowWidget(
-                                      label: 'First Name',
-                                      value: data.username),
+                                      label: 'Name', value: name ?? ''),
+                                  // infoRowWidget(
+                                  //     label: 'Last Name', value: data.username),
                                   infoRowWidget(
-                                      label: 'Last Name', value: data.username),
-                                  infoRowWidget(
-                                      label: 'Email', value: data.email),
+                                      label: 'Email', value: email ?? ''),
                                 ],
                               );
-                            }
-                            if (snapshot.hasError) {
-                              return Text(
-                                'Error loading data',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                    fontSize: 20),
+                            } else {
+                              return const Center(
+                                child: CircularProgressIndicator(
+                                  color: AppColors.colorPink,
+                                  strokeWidth: 2,
+                                ),
                               );
                             }
-                            return const Center(
-                              child: CircularProgressIndicator(
-                                color: AppColors.colorPink,
-                                strokeWidth: 2,
-                              ),
-                            );
+
+                            // if (snapshot.hasData) {
+                            //   return Column(
+                            //     children: [
+                            //       SizedBox(
+                            //         height: 40,
+                            //       ),
+                            //       infoRowWidget(label: 'Name', value: name),
+                            //       // infoRowWidget(
+                            //       //     label: 'Last Name', value: data.username),
+                            //       infoRowWidget(label: 'Email', value: email),
+                            //     ],
+                            //   );
+                            // }
+                            // if (snapshot.hasError) {
+                            //   return Text(
+                            //     'Error loading data',
+                            //     style: TextStyle(
+                            //         fontWeight: FontWeight.w500,
+                            //         color: Colors.white,
+                            //         fontSize: 20),
+                            //   );
+                            // }
+                            // return const Center(
+                            //   child: CircularProgressIndicator(
+                            //     color: AppColors.colorPink,
+                            //     strokeWidth: 2,
+                            //   ),
+                            // );
                           }),
                     ),
+
+                    //   FutureBuilder<List<UserDetailsResponse>>(
+                    //       future: UserDetailsDataSource.getUserDetails(
+                    //           AppHelpers.SHARED_PREFERENCES.getString('user') ??
+                    //               ''),
+                    //       builder: (context, snapshot) {
+                    //         if (snapshot.hasData) {
+                    //           var data = snapshot.data![0];
+                    //           return Column(
+                    //             children: [
+                    //               SizedBox(
+                    //                 height: 40,
+                    //               ),
+                    //               infoRowWidget(
+                    //                   label: 'First Name',
+                    //                   value: data.username),
+                    //               infoRowWidget(
+                    //                   label: 'Last Name', value: data.username),
+                    //               infoRowWidget(
+                    //                   label: 'Email', value: data.email),
+                    //             ],
+                    //           );
+                    //         }
+                    //         if (snapshot.hasError) {
+                    //           return Text(
+                    //             'Error loading data',
+                    //             style: TextStyle(
+                    //                 fontWeight: FontWeight.w500,
+                    //                 color: Colors.white,
+                    //                 fontSize: 20),
+                    //           );
+                    //         }
+                    //         return const Center(
+                    //           child: CircularProgressIndicator(
+                    //             color: AppColors.colorPink,
+                    //             strokeWidth: 2,
+                    //           ),
+                    //         );
+                    //       }),
+                    // ),
                   ),
                   //bottom bar
                   Container(
@@ -479,5 +537,10 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> getDataFromPreference() async {
+    email = AppHelpers.SHARED_PREFERENCES.getString('user') ?? '';
+    name = AppHelpers.SHARED_PREFERENCES.getString('name') ?? '';
   }
 }

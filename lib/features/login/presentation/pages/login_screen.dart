@@ -45,7 +45,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
       _email = _currentUser?.email;
 
-      await getUserDetail();
+      AppHelpers.SHARED_PREFERENCES.setString('passcode', "");
+      AppHelpers.SHARED_PREFERENCES.setBool('isLogged', true);
+      AppHelpers.SHARED_PREFERENCES.setString('user', _email!);
+      AppHelpers.SHARED_PREFERENCES
+          .setString('name', _currentUser?.displayName ?? '');
+      Navigator.push(
+          context,
+          PageTransition(
+              type: PageTransitionType.fade,
+              child: const ReserveLockerWidget(),
+              duration: const Duration(milliseconds: 250)));
+
+      //await getUserDetail();
     });
   }
 
@@ -455,6 +467,7 @@ class _LoginScreenState extends State<LoginScreen> {
               .setString('passcode', data.first.passcode!);
         AppHelpers.SHARED_PREFERENCES.setBool('isLogged', true);
         AppHelpers.SHARED_PREFERENCES.setString('user', _email!);
+        AppHelpers.SHARED_PREFERENCES.setString('name', data.first.username);
         Navigator.push(
             context,
             PageTransition(
