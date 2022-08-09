@@ -80,7 +80,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: FutureBuilder<List<UserDetailsResponse>>(
-                          future: UserDetailsDataSource().getUserDetails(
+                          future: UserDetailsDataSource.getUserDetails(
                               AppHelpers.SHARED_PREFERENCES.getString('user') ??
                                   ''),
                           builder: (context, snapshot) {

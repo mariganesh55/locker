@@ -10,7 +10,7 @@ import '../../../../core/app_helpers.dart';
 import '../model/change_passcode_response.dart';
 
 class UserDetailsDataSource {
-  Future<List<UserDetailsResponse>> getUserDetails(String email) async {
+  static Future<List<UserDetailsResponse>> getUserDetails(String email) async {
     var client = http.Client();
     try {
       var response = await client.post(Uri.parse(AppUrl.userDetails),
@@ -18,7 +18,7 @@ class UserDetailsDataSource {
           body: jsonEncode({'email': email}));
       if (response.statusCode == 200) {
         var jsonString = response.body;
-        print('res' + jsonString.toString());
+
         List<UserDetailsResponse> res = userDetailsResponseFromJson(jsonString);
         return res;
       } else {

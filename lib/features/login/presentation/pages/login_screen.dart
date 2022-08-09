@@ -37,15 +37,15 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) {
+    _googleSignIn.onCurrentUserChanged
+        .listen((GoogleSignInAccount? account) async {
       setState(() {
         _currentUser = account;
       });
-      print("***************");
 
-      print(_currentUser?.email);
+      _email = _currentUser?.email;
 
-      print("***************");
+      await getUserDetail();
     });
   }
 
@@ -225,39 +225,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     });
                     LoginDatasource()
                         .userLogin(_email!, _password!)
-                        .then((value) {
+                        .then((value) async {
                       print("login response -> ${value}");
                       if (value) {
-                        UserDetailsDataSource()
-                            .getUserDetails(_email!)
-                            .then((data) {
-                          print("object data --> ${data}");
-                          setState(() {
-                            _isLoading = false;
-                          });
-                          if (data.first.approve == true) {
-                            if (data.first.passcode != null)
-                              AppHelpers.SHARED_PREFERENCES
-                                  .setString('passcode', data.first.passcode!);
-                            AppHelpers.SHARED_PREFERENCES
-                                .setBool('isLogged', true);
-                            AppHelpers.SHARED_PREFERENCES
-                                .setString('user', _email!);
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.fade,
-                                    child: const ReserveLockerWidget(),
-                                    duration:
-                                        const Duration(milliseconds: 250)));
-                          } else {
-                            AppHelpers.SHARED_PREFERENCES.clear();
-                            showSnackBar(
-                                context: context,
-                                message: 'User is not approved yet.',
-                                bgColor: Colors.red);
-                          }
-                        });
+                        await getUserDetail();
                       }
                     }).catchError((e) {
                       setState(() {
@@ -471,6 +442,33 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> getUserDetail() async {
+    await UserDetailsDataSource.getUserDetails(_email!).then((data) {
+      setState(() {
+        _isLoading = false;
+      });
+      if (data.first.approve == true) {
+        if (data.first.passcode != null)
+          AppHelpers.SHARED_PREFERENCES
+              .setString('passcode', data.first.passcode!);
+        AppHelpers.SHARED_PREFERENCES.setBool('isLogged', true);
+        AppHelpers.SHARED_PREFERENCES.setString('user', _email!);
+        Navigator.push(
+            context,
+            PageTransition(
+                type: PageTransitionType.fade,
+                child: const ReserveLockerWidget(),
+                duration: const Duration(milliseconds: 250)));
+      } else {
+        AppHelpers.SHARED_PREFERENCES.clear();
+        showSnackBar(
+            context: context,
+            message: 'User is not approved yet.',
+            bgColor: Colors.red);
+      }
+    });
   }
 
   Future<void> _handleSignIn() async {
