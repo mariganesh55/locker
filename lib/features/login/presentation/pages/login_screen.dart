@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -6,6 +8,7 @@ import 'package:locker/core/app_theme.dart';
 import 'package:locker/features/login/data/datasource/login_datasource.dart';
 import 'package:locker/features/login/presentation/widgets/reserve_locker_widget.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../../../../core/app_helpers.dart';
 import '../../../../core/show_snackbar.dart';
@@ -39,25 +42,27 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     _googleSignIn.onCurrentUserChanged
         .listen((GoogleSignInAccount? account) async {
-      setState(() {
-        _currentUser = account;
-      });
-
+      _currentUser = account;
       _email = _currentUser?.email;
 
-      AppHelpers.SHARED_PREFERENCES.setString('passcode', "");
-      AppHelpers.SHARED_PREFERENCES.setBool('isLogged', true);
-      AppHelpers.SHARED_PREFERENCES.setString('user', _email!);
-      AppHelpers.SHARED_PREFERENCES
-          .setString('name', _currentUser?.displayName ?? '');
-      Navigator.push(
-          context,
-          PageTransition(
-              type: PageTransitionType.fade,
-              child: const ReserveLockerWidget(),
-              duration: const Duration(milliseconds: 250)));
-
-      //await getUserDetail();
+      setState(() {
+        _isLoading = true;
+      });
+      await UserDetailsDataSource.emailLogin(_email!).then((value) async {
+        if (value) {
+          getUserDetail();
+        } else {
+          await UserDetailsDataSource.emailRegister(_email!)
+              .then((value) async {
+            if (value) {
+              await getUserDetail();
+            }
+          });
+        }
+        setState(() {
+          _isLoading = false;
+        });
+      });
     });
   }
 
@@ -402,6 +407,46 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
+
+          if (Platform.isIOS)
+            Column(
+              children: [
+                const SizedBox(height: 11),
+                Padding(
+                  padding: const EdgeInsets.all(11),
+                  child: SignInWithAppleButton(
+                    onPressed: () async {
+                      final credential =
+                          await SignInWithApple.getAppleIDCredential(
+                        scopes: [
+                          AppleIDAuthorizationScopes.email,
+                          AppleIDAuthorizationScopes.fullName,
+                        ],
+                      );
+
+                      if (credential.email != null &&
+                          credential.givenName != null) {
+                        AppHelpers.SHARED_PREFERENCES.setString('passcode', "");
+                        AppHelpers.SHARED_PREFERENCES.setBool('isLogged', true);
+                        AppHelpers.SHARED_PREFERENCES
+                            .setString('user', credential.email!);
+                        AppHelpers.SHARED_PREFERENCES
+                            .setString('name', credential.givenName ?? '');
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.fade,
+                                child: const ReserveLockerWidget(),
+                                duration: const Duration(milliseconds: 250)));
+                      }
+
+                      // Now send the credential (especially `credential.authorizationCode`) to your server to create a session
+                      // after they have been validated with Apple (see `Integration` section for more information on how to do this)
+                    },
+                  ),
+                ),
+              ],
+            ),
           //forgot password
           const SizedBox(height: 11),
           // TextButton(
@@ -467,7 +512,8 @@ class _LoginScreenState extends State<LoginScreen> {
               .setString('passcode', data.first.passcode!);
         AppHelpers.SHARED_PREFERENCES.setBool('isLogged', true);
         AppHelpers.SHARED_PREFERENCES.setString('user', _email!);
-        AppHelpers.SHARED_PREFERENCES.setString('name', data.first.username);
+        AppHelpers.SHARED_PREFERENCES
+            .setString('name', data.first.username ?? '');
         Navigator.push(
             context,
             PageTransition(

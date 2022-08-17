@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "636337196688-0hk2hsaqah9v1pvkb8dhori36lc914gr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.locker",
+            "certificate_hash": "d04feb707f4e48df4d781771c69a8507529649f3"
+          }
+        },
+        {
+          "client_id": "636337196688-3h6rop3bq6rljp4splu5dlshsmu0bjk8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.locker",
+            "certificate_hash": "ab2916a0e281341dc63424473ac2097f4955eea9"
+          }
+        },
+        {
           "client_id": "636337196688-7of3432v8cc2njkhi3jplbmp3kkaoeok.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +45,13 @@
             {
               "client_id": "636337196688-7of3432v8cc2njkhi3jplbmp3kkaoeok.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "636337196688-8ffb00upsvqk98seanqhkq1sct22ii5k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fiberoneindia.locker"
+              }
             }
           ]
         }

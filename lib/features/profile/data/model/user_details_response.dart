@@ -22,9 +22,9 @@ class UserDetailsResponse {
       this.approve});
 
   String id;
-  String username;
+  String? username;
   String email;
-  String password;
+  String? password;
   String? role;
   String? passcode;
   bool? approve;
@@ -45,6 +45,6 @@ class UserDetailsResponse {
         "email": email,
         "password": password,
         "role": role,
-        "approve":approve
+        "approve": approve
       };
 }

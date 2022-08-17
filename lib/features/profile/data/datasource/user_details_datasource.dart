@@ -18,6 +18,9 @@ class UserDetailsDataSource {
           body: jsonEncode({'email': email}));
       if (response.statusCode == 200) {
         var jsonString = response.body;
+        jsonDecode(jsonString);
+
+        //UserDetailsResponse.fromJson(jsonDecode(jsonString)[0]);
 
         List<UserDetailsResponse> res = userDetailsResponseFromJson(jsonString);
         return res;
@@ -45,6 +48,42 @@ class UserDetailsDataSource {
         return res;
       } else {
         throw ServerException();
+      }
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  static Future<bool> emailRegister(String email) async {
+    var client = http.Client();
+    try {
+      var response = await client.post(Uri.parse(AppUrl.emailRegister),
+          headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+          body: jsonEncode({
+            'email': email,
+          }));
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  static Future<bool> emailLogin(String email) async {
+    var client = http.Client();
+    try {
+      var response = await client.post(Uri.parse(AppUrl.emailLogin),
+          headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+          body: jsonEncode({
+            'email': email,
+          }));
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
       }
     } catch (e) {
       throw ServerException();
