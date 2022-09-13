@@ -56,6 +56,58 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636337196688:android:57e869fb2616674701d215",
+        "android_client_info": {
+          "package_name": "com.locker.locker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636337196688-ab1sbmsbv3k3purdd1cs14j21nhqg90b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.locker.locker",
+            "certificate_hash": "ab2916a0e281341dc63424473ac2097f4955eea9"
+          }
+        },
+        {
+          "client_id": "636337196688-bl2mfeuanfvqtm96h7en4h6julu36qsn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.locker.locker",
+            "certificate_hash": "d04feb707f4e48df4d781771c69a8507529649f3"
+          }
+        },
+        {
+          "client_id": "636337196688-7of3432v8cc2njkhi3jplbmp3kkaoeok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLBU4yc8uZ8g8r_kQZlpR1p6Sow5AdrVY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "636337196688-7of3432v8cc2njkhi3jplbmp3kkaoeok.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "636337196688-8ffb00upsvqk98seanqhkq1sct22ii5k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fiberoneindia.locker"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

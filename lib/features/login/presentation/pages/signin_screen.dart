@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:locker/core/app_colors.dart';
+import 'package:locker/core/app_helpers.dart';
 import 'package:locker/core/app_theme.dart';
 import 'package:locker/core/show_snackbar.dart';
-import 'package:locker/features/login/data/datasource/register_datasource.dart';
+import 'package:locker/features/profile/data/datasource/user_details_datasource.dart';
+import 'package:page_transition/page_transition.dart';
+
+import '../widgets/reserve_locker_widget.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -19,6 +23,10 @@ class _SignInScreenState extends State<SignInScreen> {
   bool showConfPassword = false;
 
   final _formKey = GlobalKey<FormState>();
+
+  bool _isLoading = false;
+
+  TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -72,120 +80,120 @@ class _SignInScreenState extends State<SignInScreen> {
                     const SizedBox(
                       height: 28,
                     ),
-                    Container(
-                      height: 48,
-                      width: 343,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: const [
-                          BoxShadow(
-                              color: Color.fromRGBO(31, 31, 31, 0.9),
-                              spreadRadius: -25,
-                              offset: Offset(5, 5)),
-                          BoxShadow(
-                              color: Color.fromRGBO(51, 51, 51, 0.9),
-                              spreadRadius: -10,
-                              offset: Offset(-5, -5)),
-                          BoxShadow(
-                              color: Color.fromRGBO(31, 31, 31, 0.2),
-                              spreadRadius: -10,
-                              offset: Offset(5, -5)),
-                          BoxShadow(
-                              color: Color.fromRGBO(31, 31, 31, 0.2),
-                              spreadRadius: -10,
-                              offset: Offset(-5, 5)),
-                          BoxShadow(
-                              color: Color.fromRGBO(31, 31, 31, 0.5),
-                              spreadRadius: -2,
-                              offset: Offset(-1, -1)),
-                          BoxShadow(
-                              color: Color.fromRGBO(51, 51, 51, 0.3),
-                              spreadRadius: -2,
-                              offset: Offset(1, 1)),
-                        ],
-                      ),
-                      child: Stack(
-                        children: [
-                          TextFormField(
-                            decoration: AppTheme.textFieldDecoration(
-                                'First Name', 'assets/login/user_name.png'),
-                            style: const TextStyle(
-                                color: AppColors.hintTextGrey, fontSize: 12),
-                            onChanged: (val) => _firstName = val,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 12.0, left: 11),
-                            child: Image.asset(
-                              'assets/login/user_name.png',
-                              height: 25,
-                              width: 25,
-                              color: AppColors.hintTextGrey,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    //email
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Container(
-                      height: 48,
-                      width: 343,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: const [
-                          BoxShadow(
-                              color: Color.fromRGBO(31, 31, 31, 0.9),
-                              spreadRadius: -25,
-                              offset: Offset(5, 5)),
-                          BoxShadow(
-                              color: Color.fromRGBO(51, 51, 51, 0.9),
-                              spreadRadius: -10,
-                              offset: Offset(-5, -5)),
-                          BoxShadow(
-                              color: Color.fromRGBO(31, 31, 31, 0.2),
-                              spreadRadius: -10,
-                              offset: Offset(5, -5)),
-                          BoxShadow(
-                              color: Color.fromRGBO(31, 31, 31, 0.2),
-                              spreadRadius: -10,
-                              offset: Offset(-5, 5)),
-                          BoxShadow(
-                              color: Color.fromRGBO(31, 31, 31, 0.5),
-                              spreadRadius: -2,
-                              offset: Offset(-1, -1)),
-                          BoxShadow(
-                              color: Color.fromRGBO(51, 51, 51, 0.3),
-                              spreadRadius: -2,
-                              offset: Offset(1, 1)),
-                        ],
-                      ),
-                      child: Stack(
-                        children: [
-                          TextFormField(
-                            decoration: AppTheme.textFieldDecoration(
-                                'Last Name', 'assets/login/user_name.png'),
-                            style: const TextStyle(
-                                color: AppColors.hintTextGrey, fontSize: 12),
-                            onChanged: (val) => _lastName = val,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 12.0, left: 11),
-                            child: Image.asset(
-                              'assets/login/user_name.png',
-                              height: 25,
-                              width: 25,
-                              color: AppColors.hintTextGrey,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    //email
-                    const SizedBox(
-                      height: 15,
-                    ),
+                    // Container(
+                    //   height: 48,
+                    //   width: 343,
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(10),
+                    //     boxShadow: const [
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(31, 31, 31, 0.9),
+                    //           spreadRadius: -25,
+                    //           offset: Offset(5, 5)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(51, 51, 51, 0.9),
+                    //           spreadRadius: -10,
+                    //           offset: Offset(-5, -5)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(31, 31, 31, 0.2),
+                    //           spreadRadius: -10,
+                    //           offset: Offset(5, -5)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(31, 31, 31, 0.2),
+                    //           spreadRadius: -10,
+                    //           offset: Offset(-5, 5)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(31, 31, 31, 0.5),
+                    //           spreadRadius: -2,
+                    //           offset: Offset(-1, -1)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(51, 51, 51, 0.3),
+                    //           spreadRadius: -2,
+                    //           offset: Offset(1, 1)),
+                    //     ],
+                    //   ),
+                    //   child: Stack(
+                    //     children: [
+                    //       TextFormField(
+                    //         decoration: AppTheme.textFieldDecoration(
+                    //             'First Name', 'assets/login/user_name.png'),
+                    //         style: const TextStyle(
+                    //             color: AppColors.hintTextGrey, fontSize: 12),
+                    //         onChanged: (val) => _firstName = val,
+                    //       ),
+                    //       Padding(
+                    //         padding: const EdgeInsets.only(top: 12.0, left: 11),
+                    //         child: Image.asset(
+                    //           'assets/login/user_name.png',
+                    //           height: 25,
+                    //           width: 25,
+                    //           color: AppColors.hintTextGrey,
+                    //         ),
+                    //       )
+                    //     ],
+                    //   ),
+                    // ),
+                    // //email
+                    // const SizedBox(
+                    //   height: 15,
+                    // ),
+                    // Container(
+                    //   height: 48,
+                    //   width: 343,
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(10),
+                    //     boxShadow: const [
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(31, 31, 31, 0.9),
+                    //           spreadRadius: -25,
+                    //           offset: Offset(5, 5)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(51, 51, 51, 0.9),
+                    //           spreadRadius: -10,
+                    //           offset: Offset(-5, -5)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(31, 31, 31, 0.2),
+                    //           spreadRadius: -10,
+                    //           offset: Offset(5, -5)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(31, 31, 31, 0.2),
+                    //           spreadRadius: -10,
+                    //           offset: Offset(-5, 5)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(31, 31, 31, 0.5),
+                    //           spreadRadius: -2,
+                    //           offset: Offset(-1, -1)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(51, 51, 51, 0.3),
+                    //           spreadRadius: -2,
+                    //           offset: Offset(1, 1)),
+                    //     ],
+                    //   ),
+                    //   child: Stack(
+                    //     children: [
+                    //       TextFormField(
+                    //         decoration: AppTheme.textFieldDecoration(
+                    //             'Last Name', 'assets/login/user_name.png'),
+                    //         style: const TextStyle(
+                    //             color: AppColors.hintTextGrey, fontSize: 12),
+                    //         onChanged: (val) => _lastName = val,
+                    //       ),
+                    //       Padding(
+                    //         padding: const EdgeInsets.only(top: 12.0, left: 11),
+                    //         child: Image.asset(
+                    //           'assets/login/user_name.png',
+                    //           height: 25,
+                    //           width: 25,
+                    //           color: AppColors.hintTextGrey,
+                    //         ),
+                    //       )
+                    //     ],
+                    //   ),
+                    // ),
+                    // //email
+                    // const SizedBox(
+                    //   height: 15,
+                    // ),
                     Container(
                       height: 48,
                       width: 343,
@@ -226,6 +234,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             style: const TextStyle(
                                 color: AppColors.hintTextGrey, fontSize: 12),
                             onChanged: (val) => _email = val,
+                            controller: emailController,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 12.0, left: 11),
@@ -243,157 +252,157 @@ class _SignInScreenState extends State<SignInScreen> {
                     const SizedBox(
                       height: 15,
                     ),
-                    Container(
-                      width: 343,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: const [
-                          BoxShadow(
-                              color: Color.fromRGBO(31, 31, 31, 0.9),
-                              spreadRadius: -25,
-                              offset: Offset(5, 5)),
-                          BoxShadow(
-                              color: Color.fromRGBO(51, 51, 51, 0.9),
-                              spreadRadius: -10,
-                              offset: Offset(-5, -5)),
-                          BoxShadow(
-                              color: Color.fromRGBO(31, 31, 31, 0.2),
-                              spreadRadius: -10,
-                              offset: Offset(5, -5)),
-                          BoxShadow(
-                              color: Color.fromRGBO(31, 31, 31, 0.2),
-                              spreadRadius: -10,
-                              offset: Offset(-5, 5)),
-                          BoxShadow(
-                              color: Color.fromRGBO(31, 31, 31, 0.5),
-                              spreadRadius: -2,
-                              offset: Offset(-1, -1)),
-                          BoxShadow(
-                              color: Color.fromRGBO(51, 51, 51, 0.3),
-                              spreadRadius: -2,
-                              offset: Offset(1, 1)),
-                        ],
-                      ),
-                      child: Stack(
-                        children: [
-                          TextFormField(
-                            obscureText: !showPassword,
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            validator: (s) {
-                              const String pattern =
-                                  r'(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$)';
-
-                              RegExp regex = RegExp(pattern);
-                              if (!regex.hasMatch(s!))
-                                return 'Password should be Minimum ten characters, at least one uppercase letter, one lowercase letter, one number and one special character';
-                              else
-                                return null;
-                            },
-                            decoration: AppTheme.textFieldDecoration(
-                                    'New Password', 'assets/login/password.png')
-                                .copyWith(
-                              errorMaxLines: 5,
-                              suffixIcon: GestureDetector(
-                                onTap: () => setState(
-                                    () => showPassword = !showPassword),
-                                child: Icon(
-                                  showPassword
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  color: Color(0xFF5FB3AB),
-                                ),
-                              ),
-                            ),
-                            style: const TextStyle(
-                                color: AppColors.hintTextGrey, fontSize: 12),
-                            onChanged: (val) => _newPassword = val,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 12.0, left: 11),
-                            child: Image.asset(
-                              'assets/login/password.png',
-                              height: 25,
-                              width: 25,
-                              color: AppColors.hintTextGrey,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    //Password
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Container(
-                      height: 48,
-                      width: 343,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: const [
-                          BoxShadow(
-                              color: Color.fromRGBO(31, 31, 31, 0.9),
-                              spreadRadius: -25,
-                              offset: Offset(5, 5)),
-                          BoxShadow(
-                              color: Color.fromRGBO(51, 51, 51, 0.9),
-                              spreadRadius: -10,
-                              offset: Offset(-5, -5)),
-                          BoxShadow(
-                              color: Color.fromRGBO(31, 31, 31, 0.2),
-                              spreadRadius: -10,
-                              offset: Offset(5, -5)),
-                          BoxShadow(
-                              color: Color.fromRGBO(31, 31, 31, 0.2),
-                              spreadRadius: -10,
-                              offset: Offset(-5, 5)),
-                          BoxShadow(
-                              color: Color.fromRGBO(31, 31, 31, 0.5),
-                              spreadRadius: -2,
-                              offset: Offset(-1, -1)),
-                          BoxShadow(
-                              color: Color.fromRGBO(51, 51, 51, 0.3),
-                              spreadRadius: -2,
-                              offset: Offset(1, 1)),
-                        ],
-                      ),
-                      child: Stack(
-                        children: [
-                          TextFormField(
-                            obscureText: !showConfPassword,
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            decoration: AppTheme.textFieldDecoration(
-                                    'Confirm Password',
-                                    'assets/login/password.png')
-                                .copyWith(
-                              suffixIcon: GestureDetector(
-                                onTap: () => setState(
-                                    () => showConfPassword = !showConfPassword),
-                                child: Icon(
-                                  showConfPassword
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  color: Color(0xFF5FB3AB),
-                                ),
-                              ),
-                            ),
-                            style: const TextStyle(
-                                color: AppColors.hintTextGrey, fontSize: 12),
-                            onChanged: (val) => _conformPassword = val,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 12.0, left: 11),
-                            child: Image.asset(
-                              'assets/login/password.png',
-                              height: 25,
-                              width: 25,
-                              color: AppColors.hintTextGrey,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                    // Container(
+                    //   width: 343,
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(10),
+                    //     boxShadow: const [
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(31, 31, 31, 0.9),
+                    //           spreadRadius: -25,
+                    //           offset: Offset(5, 5)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(51, 51, 51, 0.9),
+                    //           spreadRadius: -10,
+                    //           offset: Offset(-5, -5)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(31, 31, 31, 0.2),
+                    //           spreadRadius: -10,
+                    //           offset: Offset(5, -5)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(31, 31, 31, 0.2),
+                    //           spreadRadius: -10,
+                    //           offset: Offset(-5, 5)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(31, 31, 31, 0.5),
+                    //           spreadRadius: -2,
+                    //           offset: Offset(-1, -1)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(51, 51, 51, 0.3),
+                    //           spreadRadius: -2,
+                    //           offset: Offset(1, 1)),
+                    //     ],
+                    //   ),
+                    //   child: Stack(
+                    //     children: [
+                    //       TextFormField(
+                    //         obscureText: !showPassword,
+                    //         autovalidateMode:
+                    //             AutovalidateMode.onUserInteraction,
+                    //         validator: (s) {
+                    //           const String pattern =
+                    //               r'(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$)';
+                    //
+                    //           RegExp regex = RegExp(pattern);
+                    //           if (!regex.hasMatch(s!))
+                    //             return 'Password should be Minimum ten characters, at least one uppercase letter, one lowercase letter, one number and one special character';
+                    //           else
+                    //             return null;
+                    //         },
+                    //         decoration: AppTheme.textFieldDecoration(
+                    //                 'New Password', 'assets/login/password.png')
+                    //             .copyWith(
+                    //           errorMaxLines: 5,
+                    //           suffixIcon: GestureDetector(
+                    //             onTap: () => setState(
+                    //                 () => showPassword = !showPassword),
+                    //             child: Icon(
+                    //               showPassword
+                    //                   ? Icons.visibility
+                    //                   : Icons.visibility_off,
+                    //               color: Color(0xFF5FB3AB),
+                    //             ),
+                    //           ),
+                    //         ),
+                    //         style: const TextStyle(
+                    //             color: AppColors.hintTextGrey, fontSize: 12),
+                    //         onChanged: (val) => _newPassword = val,
+                    //       ),
+                    //       Padding(
+                    //         padding: const EdgeInsets.only(top: 12.0, left: 11),
+                    //         child: Image.asset(
+                    //           'assets/login/password.png',
+                    //           height: 25,
+                    //           width: 25,
+                    //           color: AppColors.hintTextGrey,
+                    //         ),
+                    //       )
+                    //     ],
+                    //   ),
+                    // ),
+                    // //Password
+                    // const SizedBox(
+                    //   height: 15,
+                    // ),
+                    // Container(
+                    //   height: 48,
+                    //   width: 343,
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(10),
+                    //     boxShadow: const [
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(31, 31, 31, 0.9),
+                    //           spreadRadius: -25,
+                    //           offset: Offset(5, 5)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(51, 51, 51, 0.9),
+                    //           spreadRadius: -10,
+                    //           offset: Offset(-5, -5)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(31, 31, 31, 0.2),
+                    //           spreadRadius: -10,
+                    //           offset: Offset(5, -5)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(31, 31, 31, 0.2),
+                    //           spreadRadius: -10,
+                    //           offset: Offset(-5, 5)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(31, 31, 31, 0.5),
+                    //           spreadRadius: -2,
+                    //           offset: Offset(-1, -1)),
+                    //       BoxShadow(
+                    //           color: Color.fromRGBO(51, 51, 51, 0.3),
+                    //           spreadRadius: -2,
+                    //           offset: Offset(1, 1)),
+                    //     ],
+                    //   ),
+                    //   child: Stack(
+                    //     children: [
+                    //       TextFormField(
+                    //         obscureText: !showConfPassword,
+                    //         autovalidateMode:
+                    //             AutovalidateMode.onUserInteraction,
+                    //         decoration: AppTheme.textFieldDecoration(
+                    //                 'Confirm Password',
+                    //                 'assets/login/password.png')
+                    //             .copyWith(
+                    //           suffixIcon: GestureDetector(
+                    //             onTap: () => setState(
+                    //                 () => showConfPassword = !showConfPassword),
+                    //             child: Icon(
+                    //               showConfPassword
+                    //                   ? Icons.visibility
+                    //                   : Icons.visibility_off,
+                    //               color: Color(0xFF5FB3AB),
+                    //             ),
+                    //           ),
+                    //         ),
+                    //         style: const TextStyle(
+                    //             color: AppColors.hintTextGrey, fontSize: 12),
+                    //         onChanged: (val) => _conformPassword = val,
+                    //       ),
+                    //       Padding(
+                    //         padding: const EdgeInsets.only(top: 12.0, left: 11),
+                    //         child: Image.asset(
+                    //           'assets/login/password.png',
+                    //           height: 25,
+                    //           width: 25,
+                    //           color: AppColors.hintTextGrey,
+                    //         ),
+                    //       )
+                    //     ],
+                    //   ),
+                    // ),
                     /*//imei number
                     const SizedBox(height: 15,),
                     Container(
@@ -452,50 +461,88 @@ class _SignInScreenState extends State<SignInScreen> {
                       height: 53,
                     ),
                     InkWell(
-                      onTap: () {
+                      onTap: () async {
                         bool isValidated = _formKey.currentState!.validate();
 
-                        if (_newPassword?.trim() != _conformPassword?.trim()) {
+                        if (GetUtils.isEmail(emailController.text.trim())) {
+                          _email = emailController.text.trim();
+
+                          AppHelpers.SHARED_PREFERENCES
+                              .setString('passcode', "");
+                          AppHelpers.SHARED_PREFERENCES
+                              .setBool('isLogged', true);
+                          AppHelpers.SHARED_PREFERENCES
+                              .setString('user', emailController.text.trim());
+
+                          setState(() {
+                            _isLoading = true;
+                          });
+                          await UserDetailsDataSource.emailLogin(
+                                  emailController.text.trim())
+                              .then((value) async {
+                            if (value) {
+                              await getUserDetail();
+                            } else {
+                              await UserDetailsDataSource.emailRegister(
+                                      emailController.text.trim())
+                                  .then((value) async {
+                                if (value) {
+                                  await getUserDetail();
+                                }
+                              });
+                            }
+                            setState(() {
+                              _isLoading = false;
+                            });
+                          });
+                        } else {
                           showSnackBar(
                               context: context,
-                              message: 'Password mismatch',
+                              message: 'Invalid Email',
                               bgColor: Colors.red);
-                        } else if (isValidated) {
-                          if (_email != null &&
-                              _newPassword != null &&
-                              _conformPassword != null &&
-                              _lastName != null &&
-                              _firstName != null) {
-                            //validate email
-                            if (GetUtils.isEmail(_email!)) {
-                              if (_newPassword!.trim().length >= 10) {
-                                RegisterDatasource()
-                                    .registerUser(
-                                        _firstName!, _email!, _newPassword!)
-                                    .then((value) {
-                                  if (value) {
-                                    Navigator.pop(context);
-                                  }
-                                });
-                              } else {
-                                showSnackBar(
-                                    context: context,
-                                    message: 'Password too short',
-                                    bgColor: Colors.red);
-                              }
-                            } else {
-                              showSnackBar(
-                                  context: context,
-                                  message: 'Email not valid',
-                                  bgColor: Colors.red);
-                            }
-                          } else {
-                            showSnackBar(
-                                context: context,
-                                message: 'Values can\'t be empty',
-                                bgColor: Colors.red);
-                          }
                         }
+
+                        // if (_newPassword?.trim() != _conformPassword?.trim()) {
+                        //   showSnackBar(
+                        //       context: context,
+                        //       message: 'Password mismatch',
+                        //       bgColor: Colors.red);
+                        // } else if (isValidated) {
+                        //   if (_email != null &&
+                        //       _newPassword != null &&
+                        //       _conformPassword != null &&
+                        //       _lastName != null &&
+                        //       _firstName != null) {
+                        //     //validate email
+                        //     if (GetUtils.isEmail(_email!)) {
+                        //       if (_newPassword!.trim().length >= 10) {
+                        //         RegisterDatasource()
+                        //             .registerUser(
+                        //                 _firstName!, _email!, _newPassword!)
+                        //             .then((value) {
+                        //           if (value) {
+                        //             Navigator.pop(context);
+                        //           }
+                        //         });
+                        //       } else {
+                        //         showSnackBar(
+                        //             context: context,
+                        //             message: 'Password too short',
+                        //             bgColor: Colors.red);
+                        //       }
+                        //     } else {
+                        //       showSnackBar(
+                        //           context: context,
+                        //           message: 'Email not valid',
+                        //           bgColor: Colors.red);
+                        //     }
+                        //   } else {
+                        //     showSnackBar(
+                        //         context: context,
+                        //         message: 'Values can\'t be empty',
+                        //         bgColor: Colors.red);
+                        //   }
+                        // }
 
                         /*Navigator.push(
                             context,
@@ -540,14 +587,24 @@ class _SignInScreenState extends State<SignInScreen> {
                                 offset: Offset(1, 1)),
                           ],
                         ),
-                        child: const Center(
-                            child: Text(
-                          'Sign Up',
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white),
-                        )),
+                        child: Center(
+                            child: _isLoading
+                                ? Center(
+                                    child: SizedBox(
+                                        height: 20,
+                                        width: 20,
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                          strokeWidth: 2,
+                                        )),
+                                  )
+                                : Text(
+                                    'Sign Up',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white),
+                                  )),
                       ),
                     ),
 
@@ -567,5 +624,34 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> getUserDetail() async {
+    await UserDetailsDataSource.getUserDetails(_email!).then((data) {
+      setState(() {
+        _isLoading = false;
+      });
+      if (data.first.approve == true) {
+        if (data.first.passcode != null)
+          AppHelpers.SHARED_PREFERENCES
+              .setString('passcode', data.first.passcode!);
+        AppHelpers.SHARED_PREFERENCES.setBool('isLogged', true);
+        AppHelpers.SHARED_PREFERENCES.setString('user', _email!);
+        AppHelpers.SHARED_PREFERENCES
+            .setString('name', data.first.username ?? '');
+        Navigator.push(
+            context,
+            PageTransition(
+                type: PageTransitionType.fade,
+                child: const ReserveLockerWidget(),
+                duration: const Duration(milliseconds: 250)));
+      } else {
+        AppHelpers.SHARED_PREFERENCES.clear();
+        showSnackBar(
+            context: context,
+            message: 'User is not approved yet.',
+            bgColor: Colors.red);
+      }
+    });
   }
 }

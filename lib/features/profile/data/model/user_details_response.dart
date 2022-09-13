@@ -36,7 +36,9 @@ class UserDetailsResponse {
           email: json["email"],
           password: json["password"],
           role: json["role"],
-          approve: json["approve"],
+          approve: json["approve"] is String
+              ? json["approve"] == "approve"
+              : json["approve"],
           passcode: json["passcode"]);
 
   Map<String, dynamic> toJson() => {

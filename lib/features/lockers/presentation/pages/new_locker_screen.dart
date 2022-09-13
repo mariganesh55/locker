@@ -293,9 +293,8 @@ class _NewLockerScreenState extends State<NewLockerScreen> {
                                             AppHelpers.SHARED_PREFERENCES
                                                 .getString('user'))
                                           InkWell(
-                                            onTap: () {
-                                              
-                                                LockerDatasource()
+                                            onTap: () async {
+                                              await LockerDatasource()
                                                   .unlockLocker(
                                                       widget.response.name,
                                                       widget.response.key,
@@ -317,15 +316,9 @@ class _NewLockerScreenState extends State<NewLockerScreen> {
                                                       message:
                                                           '${widget.response.name} Unlock failed',
                                                       bgColor: Colors.red);
-
                                                 }
                                               });
-                                                
-                                              
-                                              
-                        
                                             },
-
                                             child: Container(
                                               width: 100,
                                               height: 40,

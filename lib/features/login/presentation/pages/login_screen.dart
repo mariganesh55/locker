@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:locker/core/app_colors.dart';
 import 'package:locker/core/app_theme.dart';
 import 'package:locker/features/login/data/datasource/login_datasource.dart';
+import 'package:locker/features/login/presentation/pages/signin_screen.dart';
 import 'package:locker/features/login/presentation/widgets/reserve_locker_widget.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -50,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
       });
       await UserDetailsDataSource.emailLogin(_email!).then((value) async {
         if (value) {
-          getUserDetail();
+          await getUserDetail();
         } else {
           await UserDetailsDataSource.emailRegister(_email!)
               .then((value) async {
@@ -424,20 +425,33 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       );
 
-                      if (credential.email != null &&
+                      if (credential.email == null ||
+                          credential.email!.trim().isEmpty) {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.fade,
+                                child: const SignInScreen(),
+                                duration: const Duration(milliseconds: 250)));
+                      } else if (credential.email != null &&
                           credential.givenName != null) {
+                        _email = credential.email;
+
                         AppHelpers.SHARED_PREFERENCES.setString('passcode', "");
                         AppHelpers.SHARED_PREFERENCES.setBool('isLogged', true);
                         AppHelpers.SHARED_PREFERENCES
                             .setString('user', credential.email!);
                         AppHelpers.SHARED_PREFERENCES
                             .setString('name', credential.givenName ?? '');
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType.fade,
-                                child: const ReserveLockerWidget(),
-                                duration: const Duration(milliseconds: 250)));
+
+                        await getUserDetail();
+
+                        // Navigator.push(
+                        //     context,
+                        //     PageTransition(
+                        //         type: PageTransitionType.fade,
+                        //         child: const ReserveLockerWidget(),
+                        //         duration: const Duration(milliseconds: 250)));
                       }
 
                       // Now send the credential (especially `credential.authorizationCode`) to your server to create a session

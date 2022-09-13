@@ -2,11 +2,10 @@ import 'dart:convert';
 
 List<AllLockerResponse> allLockerResponseFromJson(String str) {
   // print("object string  --> $str");
-  return List<AllLockerResponse>.from(
-        json.decode(str).map((x) {
-          print("object decode  --> $x");
-          return AllLockerResponse.fromJson(x);
-        }));
+  return List<AllLockerResponse>.from(json.decode(str).map((x) {
+    print("object decode  --> $x");
+    return AllLockerResponse.fromJson(x);
+  }));
 }
 
 String allLockerResponseToJson(List<AllLockerResponse> data) =>
@@ -39,10 +38,8 @@ class AllLockerResponse {
           name: json["name"],
           status: json["status"],
           key: json["key"],
-          // publishTopic: json["publish_topic"],
-          publishTopic: null,
-          // subscribeTopic: json["subscribe_topic"],
-          subscribeTopic: null,
+          publishTopic: json["publish_topic"],
+          subscribeTopic: json["subscribe_topic"],
           user: json["user"],
           userStatus: json["userstatus"]);
 

@@ -20,10 +20,10 @@ class UserDetailsDataSource {
         var jsonString = response.body;
         jsonDecode(jsonString);
 
-        //UserDetailsResponse.fromJson(jsonDecode(jsonString)[0]);
+        UserDetailsResponse res =
+            UserDetailsResponse.fromJson(jsonDecode(jsonString)[0]);
 
-        List<UserDetailsResponse> res = userDetailsResponseFromJson(jsonString);
-        return res;
+        return [res];
       } else {
         throw ServerException();
       }
