@@ -94,7 +94,9 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                   // infoRowWidget(
                                   //     label: 'Last Name', value: data.username),
                                   infoRowWidget(
-                                      label: 'Email', value: email ?? ''),
+                                    label: 'Email',
+                                    value: email ?? '',
+                                  ),
                                 ],
                               );
                             } else {
@@ -508,18 +510,16 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Expanded(
-            child: Text(label,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.textGrey,
-                )),
-          ),
+          Text(label,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+                color: AppColors.textGrey,
+              )),
           Text(
-            '   :   ',
+            ' : ',
             style: TextStyle(
-              fontSize: 22,
+              fontSize: 18,
               fontWeight: FontWeight.w400,
               color: AppColors.textGrey,
             ),
@@ -528,6 +528,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               flex: 2,
               child: Text(
                 value,
+                softWrap: true,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w400,

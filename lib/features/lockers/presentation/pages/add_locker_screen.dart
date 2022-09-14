@@ -92,7 +92,8 @@ class _AddLockersScreenState extends State<AddLockersScreen> {
                                   List<AllLockerResponse> lockersList = [];
                                   for (var locker in snapShot.data!) {
                                     print(locker);
-                                    if (locker.user == '') {
+                                    if (locker.user == '' ||
+                                        locker.user == "null") {
                                       lockersList.add(locker);
                                     }
                                   }

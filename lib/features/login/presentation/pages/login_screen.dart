@@ -41,30 +41,31 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _googleSignIn.onCurrentUserChanged
-        .listen((GoogleSignInAccount? account) async {
-      _currentUser = account;
-      _email = _currentUser?.email;
 
-      setState(() {
-        _isLoading = true;
-      });
-      await UserDetailsDataSource.emailLogin(_email!).then((value) async {
-        if (value) {
-          await getUserDetail();
-        } else {
-          await UserDetailsDataSource.emailRegister(_email!)
-              .then((value) async {
-            if (value) {
-              await getUserDetail();
-            }
-          });
-        }
-        setState(() {
-          _isLoading = false;
-        });
-      });
-    });
+    // _googleSignIn._googleSignIn.onCurrentUserChanged
+    //     .listen((GoogleSignInAccount? account) async {
+    //   _currentUser = account;
+    //   _email = _currentUser?.email;
+    //
+    //   setState(() {
+    //     _isLoading = true;
+    //   });
+    //   await UserDetailsDataSource.emailLogin(_email!).then((value) async {
+    //     if (value) {
+    //       await getUserDetail();
+    //     } else {
+    //       await UserDetailsDataSource.emailRegister(_email!)
+    //           .then((value) async {
+    //         if (value) {
+    //           await getUserDetail();
+    //         }
+    //       });
+    //     }
+    //     setState(() {
+    //       _isLoading = false;
+    //     });
+    //   });
+    // });
   }
 
   @override
@@ -546,7 +547,30 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _handleSignIn() async {
     try {
-      await _googleSignIn.signIn();
+      GoogleSignInAccount? account = await _googleSignIn.signIn();
+      if (account != null) {
+        _currentUser = account;
+        _email = _currentUser?.email;
+
+        setState(() {
+          _isLoading = true;
+        });
+        await UserDetailsDataSource.emailLogin(_email!).then((value) async {
+          if (value) {
+            await getUserDetail();
+          } else {
+            await UserDetailsDataSource.emailRegister(_email!)
+                .then((value) async {
+              if (value) {
+                await getUserDetail();
+              }
+            });
+          }
+          setState(() {
+            _isLoading = false;
+          });
+        });
+      }
     } catch (error) {
       print(error);
     }
