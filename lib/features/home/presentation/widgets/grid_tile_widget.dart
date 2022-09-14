@@ -24,7 +24,7 @@ class _GridTileWidgetState extends State<GridTileWidget> {
   static bool _isStart = true;
 
   String getStatus(String? userEmail) {
-    if (userEmail == '')
+    if (userEmail == '' || userEmail == "null")
       return 'Available';
     else if (userEmail == AppHelpers.SHARED_PREFERENCES.getString('user'))
       return 'Owned';
