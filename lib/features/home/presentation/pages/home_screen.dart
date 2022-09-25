@@ -123,6 +123,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                       lockersList.add(locker);
                                     }
                                   }
+
+                                  if (lockersList.isEmpty) {
+                                    lockersList.clear();
+
+                                    for (var locker in snapShot.data!) {
+                                      print(locker);
+                                      if (locker.user == '' ||
+                                          locker.user == "null") {
+                                        lockersList.add(locker);
+                                      }
+                                    }
+                                  }
                                 } else {
                                   lockersList = snapShot.data!;
                                 }
