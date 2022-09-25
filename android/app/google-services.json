@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "636337196688-pkf2rg314n3ppslkuqqa8bc93ndcqq06.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.locker",
+            "certificate_hash": "1173f00b027615e41ac6a1808119fe69604ef073"
+          }
+        },
+        {
           "client_id": "636337196688-7of3432v8cc2njkhi3jplbmp3kkaoeok.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -65,6 +73,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "636337196688-70l73o9k13pjdtaqu4eulmn7jif7tt09.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.locker.locker",
+            "certificate_hash": "1173f00b027615e41ac6a1808119fe69604ef073"
+          }
+        },
         {
           "client_id": "636337196688-ab1sbmsbv3k3purdd1cs14j21nhqg90b.apps.googleusercontent.com",
           "client_type": 1,
