@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:locker/core/app_colors.dart';
 import 'package:locker/features/lockers/presentation/widgets/password_widget.dart';
-import 'package:locker/features/profile/presentation/pages/my_lockers_screen.dart';
 import 'package:locker/features/profile/presentation/pages/my_profile_screen.dart';
 import 'package:locker/features/profile/presentation/widgets/profile_options_widget.dart';
 import 'package:page_transition/page_transition.dart';
@@ -98,16 +97,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       type: PageTransitionType.fade,
                     )),
               ),
-              ProfileOptionsWidget(
-                index: 2,
-                title: 'My Lockers',
-                onTap: () => Navigator.push(
-                    context,
-                    PageTransition(
-                      child: MyLockersScreen(),
-                      type: PageTransitionType.fade,
-                    )),
-              ),
+              // ProfileOptionsWidget(
+              //   index: 2,
+              //   title: 'My Lockers',
+              //   onTap: () => Navigator.push(
+              //       context,
+              //       PageTransition(
+              //         child: MyLockersScreen(),
+              //         type: PageTransitionType.fade,
+              //       )),
+              // ),
               ProfileOptionsWidget(
                   index: 3,
                   title: 'Create / Change Pass code',

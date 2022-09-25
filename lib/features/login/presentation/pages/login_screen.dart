@@ -239,21 +239,30 @@ class _LoginScreenState extends State<LoginScreen> {
                 if (_email != null && _password != null) {
                   //validate email
                   if (GetUtils.isEmail(_email!)) {
-                    setState(() {
-                      _isLoading = true;
-                    });
-                    LoginDatasource()
-                        .userLogin(_email!, _password!)
-                        .then((value) async {
-                      print("login response -> ${value}");
-                      if (value) {
-                        await getUserDetail();
-                      }
-                    }).catchError((e) {
+                    var rx = RegExp("\b*@izeno\.com\$", caseSensitive: false);
+
+                    if (rx.hasMatch(_email!)) {
                       setState(() {
-                        _isLoading = false;
+                        _isLoading = true;
                       });
-                    });
+                      LoginDatasource()
+                          .userLogin(_email!, _password!)
+                          .then((value) async {
+                        print("login response -> ${value}");
+                        if (value) {
+                          await getUserDetail();
+                        }
+                      }).catchError((e) {
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      });
+                    } else {
+                      showSnackBar(
+                          context: context,
+                          message: 'Invalid domain name',
+                          bgColor: Colors.red);
+                    }
                   } else {
                     showSnackBar(
                         context: context,
@@ -551,7 +560,6 @@ class _LoginScreenState extends State<LoginScreen> {
       if (account != null) {
         _currentUser = account;
         _email = _currentUser?.email;
-
         setState(() {
           _isLoading = true;
         });

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:locker/core/app_colors.dart';
 import 'package:locker/core/app_controllers.dart';
 import 'package:locker/core/app_helpers.dart';
-import 'package:locker/features/lockers/presentation/pages/add_locker_screen.dart';
 import 'package:locker/features/login/presentation/pages/login_home_screen.dart';
 import 'package:locker/features/profile/presentation/pages/profile_screen.dart';
 import 'package:page_transition/page_transition.dart';
@@ -325,64 +324,64 @@ class _HomeScreenMainState extends State<HomeScreenMain> {
             ],
           ),
           //add button
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 78.0),
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      PageTransition(
-                        child: AddLockersScreen(),
-                        type: PageTransitionType.fade,
-                      ));
-                },
-                child: Container(
-                  height: 69,
-                  width: 69,
-                  decoration: BoxDecoration(
-                      color: AppColors.scaffoldBG,
-                      borderRadius: BorderRadius.circular(100),
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Color.fromRGBO(27, 27, 27, 0.9),
-                            blurRadius: 25,
-                            offset: Offset(10, 10)),
-                        BoxShadow(
-                            color: Color.fromRGBO(55, 55, 55, 0.9),
-                            blurRadius: 20,
-                            offset: Offset(-10, -10)),
-                        BoxShadow(
-                            color: Color.fromRGBO(27, 27, 27, 0.2),
-                            blurRadius: 20,
-                            offset: Offset(10, -10)),
-                        BoxShadow(
-                            color: Color.fromRGBO(27, 27, 27, 0.2),
-                            blurRadius: 20,
-                            offset: Offset(-10, 10)),
-                        BoxShadow(
-                            color: Color.fromRGBO(27, 27, 27, 0.5),
-                            blurRadius: 2,
-                            blurStyle: BlurStyle.inner,
-                            offset: Offset(-1, -1)),
-                        BoxShadow(
-                            color: Color.fromRGBO(55, 55, 55, 0.3),
-                            blurRadius: 2,
-                            blurStyle: BlurStyle.inner,
-                            offset: Offset(1, 1)),
-                      ]),
-                  child: const Center(
-                    child: Icon(
-                      Icons.add,
-                      size: 45,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          )
+          // Align(
+          //   alignment: Alignment.bottomCenter,
+          //   child: Padding(
+          //     padding: const EdgeInsets.only(bottom: 78.0),
+          //     child: InkWell(
+          //       onTap: () {
+          //         Navigator.push(
+          //             context,
+          //             PageTransition(
+          //               child: AddLockersScreen(),
+          //               type: PageTransitionType.fade,
+          //             ));
+          //       },
+          //       child: Container(
+          //         height: 69,
+          //         width: 69,
+          //         decoration: BoxDecoration(
+          //             color: AppColors.scaffoldBG,
+          //             borderRadius: BorderRadius.circular(100),
+          //             boxShadow: const [
+          //               BoxShadow(
+          //                   color: Color.fromRGBO(27, 27, 27, 0.9),
+          //                   blurRadius: 25,
+          //                   offset: Offset(10, 10)),
+          //               BoxShadow(
+          //                   color: Color.fromRGBO(55, 55, 55, 0.9),
+          //                   blurRadius: 20,
+          //                   offset: Offset(-10, -10)),
+          //               BoxShadow(
+          //                   color: Color.fromRGBO(27, 27, 27, 0.2),
+          //                   blurRadius: 20,
+          //                   offset: Offset(10, -10)),
+          //               BoxShadow(
+          //                   color: Color.fromRGBO(27, 27, 27, 0.2),
+          //                   blurRadius: 20,
+          //                   offset: Offset(-10, 10)),
+          //               BoxShadow(
+          //                   color: Color.fromRGBO(27, 27, 27, 0.5),
+          //                   blurRadius: 2,
+          //                   blurStyle: BlurStyle.inner,
+          //                   offset: Offset(-1, -1)),
+          //               BoxShadow(
+          //                   color: Color.fromRGBO(55, 55, 55, 0.3),
+          //                   blurRadius: 2,
+          //                   blurStyle: BlurStyle.inner,
+          //                   offset: Offset(1, 1)),
+          //             ]),
+          //         child: const Center(
+          //           child: Icon(
+          //             Icons.add,
+          //             size: 45,
+          //             color: Colors.white,
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );

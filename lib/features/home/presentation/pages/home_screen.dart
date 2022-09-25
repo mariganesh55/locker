@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool showMyLockersOnly = false;
+  bool showMyLockersOnly = true;
   void refresh() {}
 
   @override
@@ -79,26 +79,26 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 12,
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                  left: size.width * 0.05, right: size.width * 0.04),
-              child: Row(
-                children: [
-                  Text(
-                    'My Lockers',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.textGrey),
-                  ),
-                  Spacer(),
-                  Checkbox(
-                      activeColor: AppColors.lightGreen,
-                      value: showMyLockersOnly,
-                      onChanged: (s) => setState(() => showMyLockersOnly = s!)),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.only(
+            //       left: size.width * 0.05, right: size.width * 0.04),
+            //   child: Row(
+            //     children: [
+            //       Text(
+            //         'My Lockers',
+            //         style: TextStyle(
+            //             fontSize: 16,
+            //             fontWeight: FontWeight.w400,
+            //             color: AppColors.textGrey),
+            //       ),
+            //       Spacer(),
+            //       Checkbox(
+            //           activeColor: AppColors.lightGreen,
+            //           value: showMyLockersOnly,
+            //           onChanged: (s) => setState(() => showMyLockersOnly = s!)),
+            //     ],
+            //   ),
+            // ),
             //grid view
             Expanded(
                 child: GetBuilder<LockerController>(
@@ -138,6 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   );
                                 }
+
                                 return Padding(
                                     padding: EdgeInsets.only(
                                         left: size.width * 0.025,
