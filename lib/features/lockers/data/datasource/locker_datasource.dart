@@ -42,7 +42,8 @@ class LockerDatasource {
             "name": name,
             "key": key,
             "publish_topic": publishTopic,
-            "subscribe_topic": subscribeTopic
+            "subscribe_topic": subscribeTopic,
+            "email": AppHelpers.SHARED_PREFERENCES.getString('user') ?? ''
           }));
       if (response.statusCode == 200) {
         return true;
